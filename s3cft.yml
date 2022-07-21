@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  BucketPrepend:
+    Description: The value prepended at begninning of bucket
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+      - stage
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join [ '-', [ !Ref BucketPrepend, s3bucket ] ]
+Outputs:
+  BucketName:
+    Value: !Ref S3Bucket
+    Description: Name of the sample Amazon S3 bucket.
